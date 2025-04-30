@@ -1,0 +1,279 @@
+/* Variáveis de cores baseadas no elemento fogo e água */
+:root {
+    --vermelho-fogo: #AF2B1E;
+    --vermelho-puro: #FF0000;
+    --laranja-vivo: #FF5733;
+    --vermelho-alaranjado: #F75E25;
+    --dourado: #FFD700;
+    --bg-dark: #0a0a0a;
+    --text-light: #f4f4f4;
+    --card-bg: rgba(10, 10, 10, 0.8);
+    /* Novas variáveis para água */
+    --azul-agua: #DEF4FC;
+    --agua-marinha: #7FFFD4;
+    --azul-piscina: #66CDAA;
+    --ciano-agua: #00FFFF;
+    --azul-celeste-claro: #87CEEB;
+    --verde-agua-marinha: #5DA8AE;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+    position: relative;
+}
+
+body {
+    background-image: url('./images/background1.png');
+    background-size: cover;
+    background-position: center right;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container {
+    width: 40%;
+    min-width: 350px;
+    max-width: 500px;
+    margin-left: 5%;
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    animation: fadeIn 1s ease-in-out;
+    border-left: 3px solid var(--vermelho-alaranjado);
+    border-bottom: 3px solid var(--vermelho-alaranjado);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+h1 {
+    color: var(--dourado);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.description {
+    margin-bottom: 1.5rem;
+}
+
+.description p {
+    margin-bottom: 10px;
+}
+
+.description ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.description li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.description li::before {
+    content: "•";
+    color: var(--laranja-vivo);
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.fire { color: var(--vermelho-alaranjado); font-weight: bold; }
+.water { color: #00a2ff; font-weight: bold; }
+.earth { color: #2ecc71; font-weight: bold; }
+.air { color: #a0a0a0; font-weight: bold; }
+
+.input-container {
+    margin-bottom: 1.5rem;
+}
+
+.elemental-input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(30, 30, 30, 0.7);
+    border: 1px solid var(--vermelho-fogo);
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.elemental-input:focus {
+    outline: none;
+    border-color: var(--dourado);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    gap: 10px;
+}
+
+.result-container {
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid var(--vermelho-fogo);
+}
+
+.result-container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--laranja-vivo);
+}
+
+.result-box {
+    min-height: 60px;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(20, 20, 20, 0.5);
+    word-break: break-all;
+    letter-spacing: 1px;
+    font-size: 18px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos base do botão com glow */
+.glow-on-hover {
+    width: 48%;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Animação para o botão DESVENDAR (fogo) */
+.glow-on-hover.fire-button:before {
+    content: '';
+    background: linear-gradient(45deg, 
+        var(--vermelho-fogo), 
+        var(--vermelho-alaranjado), 
+        var(--dourado), 
+        var(--laranja-vivo), 
+        var(--vermelho-puro),
+        var(--vermelho-fogo));
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+/* Animação para o botão REINICIAR (água) */
+.glow-on-hover.water-button:before {
+    content: '';
+    background: linear-gradient(45deg, 
+        var(--azul-agua), 
+        var(--agua-marinha), 
+        var(--azul-piscina), 
+        var(--ciano-agua), 
+        var(--azul-celeste-claro),
+        var(--verde-agua-marinha),
+        var(--azul-agua));
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000;
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Adaptação para dispositivos móveis */
+@media (max-width: 768px) {
+    body {
+        background-position: center;
+        justify-content: center;
+    }
+
+    .container {
+        margin: 0 20px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+    }
+
+    .glow-on-hover {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
